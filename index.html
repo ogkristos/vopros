@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отсосешь?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        #text {
+            font-size: 10vw; /* Используем относительный размер для адаптивности */
+            max-font-size: 200px; /* Максимальный размер шрифта для больших экранов */
+            color: #ff4081;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle 1.5s infinite alternate;
+        }
+        .button-container {
+            display: flex;
+            gap: 20px;
+            flex-direction: column; /* Стековое расположение кнопок на мобильных устройствах */
+        }
+        .answer-btn {
+            font-size: 4vw; /* Относительный размер шрифта для кнопок */
+            padding: 10px 20px;
+            color: #ff4081;
+            background: #333;
+            border: 2px solid #ff4081;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .answer-btn:hover {
+            background: #ff4081;
+            color: #fff;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Медиа-запросы для меньших экранов */
+        @media (max-width: 600px) {
+            #text {
+                font-size: 40px; /* Фиксированный размер для маленьких экранов */
+            }
+            .answer-btn {
+                font-size: 18px; /* Фиксированный размер для кнопок на маленьких экранах */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="text">Отсосешь?</div>
+    <div class="button-container">
+        <button class="answer-btn" onclick="showHeart()">Да</button>
+        <button class="answer-btn" onclick="showNo()">Нет</button>
+    </div>
+
+    <script>
+        // Функция для создания звезд
+        function createStars() {
+            const starCount = 100;
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+
+                const size = Math.random() * 3 + 2;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+
+                document.body.appendChild(star);
+            }
+        }
+
+        // Функция для показа сердечка
+        function showHeart() {
+            document.getElementById("text").textContent = "❤️";
+            document.querySelector('.button-container').style.display = 'none';
+        }
+
+        // Функция для показа сообщения "Иди нахуй"
+        function showNo() {
+            document.getElementById("text").textContent = "Иди нахуй";
+            document.querySelector('.button-container').style.display = 'none';
+        }
+
+        createStars();
+    </script>
+</body>
+</html>
